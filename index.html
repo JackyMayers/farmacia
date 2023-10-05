@@ -4,80 +4,119 @@
 <head>
     <title>Farmacia</title>
 </head>
-<body>
-    <h1>Farmacia</h1>
+<center>
+    <body>
+        <h1>Farmacia</h1>
 
-    <form id="calculadoraForm">
+        <form id="calculadoraForm">
+            <table>
+                <thead>
+                    <tr>
+                        <th><font color="purple">Produto</font></th>
+                        <th><font color="purple">Preço Unitário</font></th>
+                        <th><font color="purple">Quantidade</font></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th><font color="red">Analgésico - </font></th>
+                        <th>$ 200 - Max. 5</th>
+                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                    </tr>
+                    <tr>
+                        <th><font color="red">Bandagem -</font> </th>
+                        <th>$ 500 - Max. 3</th>
+                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                    </tr>
+                    <tr>
+                        <th><font color="red">Gaze - </font> </th>
+                        <th> $ 250 - Max. 3</th>
+                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                    </tr>
+                    <tr>
+                        <th><font color="red">Kit Médico -</font> </th>
+                        <th>$ 1350 - Max. 2</th>
+                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                    </tr>
+                    <tr>
+                        <th><font color="red">Ritmoneury - </font></th>
+                        <th>$ 925 - Max. 3</th>
+                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                    </tr>
+                    <tr>
+                        <th><font color="red">Sinkalmy - </font></th>
+                        <th>$ 750 - Max. 3</th>
+                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+            <br>
+            <input type="submit" value="Calcular">
+        </form>
+
+        <div id="resultado">
+            <!-- O resultado será exibido aqui -->
+        </div>
+
+        <script>
+            document.getElementById("calculadoraForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                // Obter todos os campos de quantidade
+                var quantidades = document.getElementsByClassName("quantidade");
+
+                // Definir os preços dos produtos (pode ser melhorado com um objeto ou banco de dados)
+                var precos = [200, 500, 250, 1350, 925, 750];
+
+                var valorTotal = 0;
+
+                // Calcular o valor total somando os produtos diferentes com as quantidades correspondentes
+                for (var i = 0; i < quantidades.length; i++) {
+                    var quantidade = parseFloat(quantidades[i].value);
+                    valorTotal += quantidade * precos[i];
+                }
+
+                // Exibir o resultado
+                document.getElementById("resultado").innerHTML = "Valor Total: $" + valorTotal.toFixed(2);
+            });
+        </script>
+        <h1>Valores do atendimento</h1>
         <table>
             <thead>
                 <tr>
-                    <th>Produto</th>
-                    <th>Preço Unitário</th>
-                    <th>Quantidade</th>
+                    <th><font color="purple">Civis - </font></th>
+                    <th><font color="red">$500</font></th>
+
                 </tr>
             </thead>
-            <tbody>
+            <thead>
                 <tr>
-                    <td>Analgésico - </td>
-                    <td>$ 200 - Max. 5</td>
-                    <td><input type="number" class="quantidade" min="0" value="0"></td>
+                    <th><font color="purple">Policial fardado - </font></th>
+                    <th><font color="red">$ 250</font></th>
+
                 </tr>
+            </thead>
+            <thead>
                 <tr>
-                    <td>Bandagem - </td>
-                    <td>$ 500 - Max. 3</td>
-                    <td><input type="number" class="quantidade" min="0" value="0"></td>
+                    <th><font color="purple">Doadores de sangue - </font></th>
+                    <th><font color="red">Grátis dentro de 3 horas após a doação</font></th>
+
                 </tr>
-                <tr>
-                    <td>Gaze -  </td>
-                    <td>$ 250 - Max. 3</td>
-                    <td><input type="number" class="quantidade" min="0" value="0"></td>
-                </tr>
-                <tr>
-                    <td>Kit Médico - </td>
-                    <td>$ 1350 - Max. 2</td>
-                    <td><input type="number" class="quantidade" min="0" value="0"></td>
-                </tr>
-                <tr>
-                    <td>Ritmoneury - </td>
-                    <td>$ 925 - Max. 3</td>
-                    <td><input type="number" class="quantidade" min="0" value="0"></td>
-                </tr>
-                <tr>
-                    <td>Sinkalmy - </td>
-                    <td>$ 750 - Max. 3</td>
-                    <td><input type="number" class="quantidade" min="0" value="0"></td>
-                </tr>
-            </tbody>
+            </thead>
+
+
         </table>
-        <br>
-        <input type="submit" value="Calcular">
-    </form>
 
-    <div id="resultado">
-        <!-- O resultado será exibido aqui -->
-    </div>
 
-    <script>
-        document.getElementById("calculadoraForm").addEventListener("submit", function (event) {
-            event.preventDefault();
 
-            // Obter todos os campos de quantidade
-            var quantidades = document.getElementsByClassName("quantidade");
-
-            // Definir os preços dos produtos (pode ser melhorado com um objeto ou banco de dados)
-            var precos = [200, 500, 250, 1350, 925, 750];
-
-            var valorTotal = 0;
-
-            // Calcular o valor total somando os produtos diferentes com as quantidades correspondentes
-            for (var i = 0; i < quantidades.length; i++) {
-                var quantidade = parseFloat(quantidades[i].value);
-                valorTotal += quantidade * precos[i];
-            }
-
-            // Exibir o resultado
-            document.getElementById("resultado").innerHTML = "Valor Total: $" + valorTotal.toFixed(2);
-        });
-    </script>
-</body>
+    </body>
+    
+        <img align="center"  src="https://cdn.discordapp.com/attachments/1121604849159647273/1159476288625594368/HP_Distrito.png?ex=65312971&is=651eb471&hm=08aee764ab335a325ed40bb89646f9c7a2f225ad8a0d0a836ca7e14f3843c207&" alt="">
+        
+    
+</center>
 </html>
