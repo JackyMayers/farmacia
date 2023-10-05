@@ -1,0 +1,83 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farmacia</title>
+</head>
+<body>
+    <h1>Farmacia</h1>
+
+    <form id="calculadoraForm">
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço Unitário</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Analgésico - </td>
+                    <td>$ 200 - Max. 5</td>
+                    <td><input type="number" class="quantidade" min="0" value="0"></td>
+                </tr>
+                <tr>
+                    <td>Bandagem - </td>
+                    <td>$ 500 - Max. 3</td>
+                    <td><input type="number" class="quantidade" min="0" value="0"></td>
+                </tr>
+                <tr>
+                    <td>Gaze -  </td>
+                    <td>$ 250 - Max. 3</td>
+                    <td><input type="number" class="quantidade" min="0" value="0"></td>
+                </tr>
+                <tr>
+                    <td>Kit Médico - </td>
+                    <td>$ 1350 - Max. 2</td>
+                    <td><input type="number" class="quantidade" min="0" value="0"></td>
+                </tr>
+                <tr>
+                    <td>Ritmoneury - </td>
+                    <td>$ 925 - Max. 3</td>
+                    <td><input type="number" class="quantidade" min="0" value="0"></td>
+                </tr>
+                <tr>
+                    <td>Sinkalmy - </td>
+                    <td>$ 750 - Max. 3</td>
+                    <td><input type="number" class="quantidade" min="0" value="0"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <input type="submit" value="Calcular">
+    </form>
+
+    <div id="resultado">
+        <!-- O resultado será exibido aqui -->
+    </div>
+
+    <script>
+        document.getElementById("calculadoraForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Obter todos os campos de quantidade
+            var quantidades = document.getElementsByClassName("quantidade");
+
+            // Definir os preços dos produtos (pode ser melhorado com um objeto ou banco de dados)
+            var precos = [200, 500, 250, 1350, 925, 750];
+
+            var valorTotal = 0;
+
+            // Calcular o valor total somando os produtos diferentes com as quantidades correspondentes
+            for (var i = 0; i < quantidades.length; i++) {
+                var quantidade = parseFloat(quantidades[i].value);
+                valorTotal += quantidade * precos[i];
+            }
+
+            // Exibir o resultado
+            document.getElementById("resultado").innerHTML = "Valor Total: $" + valorTotal.toFixed(2);
+        });
+    </script>
+</body>
+</html>
