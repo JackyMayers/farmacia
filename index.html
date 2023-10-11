@@ -3,19 +3,16 @@
 <head>
     <title>Farmacia</title>
     <style>
-        
         body.light-mode {
             background-color: white;
             color: black;
         }
 
-        
         body.dark-mode {
             background-color: black;
             color: white;
         }
 
-        
         #dark-mode-button {
             position: absolute;
             top: 10px;
@@ -25,8 +22,6 @@
 </head>
 
 <body class="light-mode">
-    
-
     <button id="dark-mode-button" onclick="toggleDarkMode()">Modo Escuro</button>
 
     <center>
@@ -46,72 +41,87 @@
                         <th><font color="purple">Produto</font></th>
                         <th><font color="purple">Preço Unitário</font></th>
                         <th><font color="purple">Quantidade</font></th>
+                        <th><font color="purple">Valor Total</font></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th><font color="Maroon">Analgésico - </font></th>
-                        <th>$ 200 - Max. 5</th>
-                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                        <th><font color="Maroon">Analgésico</font></th>
+                        <th><span id="preco-analgesico">$ 200</span> - Max. 5</th>
+                        <th><input type="number" class="quantidade" data-produto="analgesico" min="0" value="0" oninput="atualizarValorTotal()"></th>
+                        <th><span id="total-analgesico">0</span></th>
                     </tr>
                     <tr>
-                        <th><font color="Maroon">Bandagem -</font> </th>
-                        <th>$ 500 - Max. 3</th>
-                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                        <th><font color="Maroon">Bandagem</font></th>
+                        <th><span id="preco-bandagem">$ 500</span> - Max. 3</th>
+                        <th><input type="number" class="quantidade" data-produto="bandagem" min="0" value="0" oninput="atualizarValorTotal()"></th>
+                        <th><span id="total-bandagem">0</span></th>
                     </tr>
                     <tr>
-                        <th><font color="Maroon">Gaze - </font> </th>
-                        <th> $ 250 - Max. 3</th>
-                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                        <th><font color="Maroon">Gaze</font></th>
+                        <th><span id="preco-gaze">$ 250</span> - Max. 3</th>
+                        <th><input type="number" class="quantidade" data-produto="gaze" min="0" value="0" oninput="atualizarValorTotal()"></th>
+                        <th><span id="total-gaze">0</span></th>
                     </tr>
                     <tr>
-                        <th><font color="Maroon">Kit Médico -</font> </th>
-                        <th>$ 1350 - Max. 2</th>
-                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                        <th><font color="Maroon">Kit Médico</font></th>
+                        <th><span id="preco-kit-medico">$ 1350</span> - Max. 2</th>
+                        <th><input type="number" class="quantidade" data-produto="kit-medico" min="0" value="0" oninput="atualizarValorTotal()"></th>
+                        <th><span id="total-kit-medico">0</span></th>
                     </tr>
                     <tr>
-                        <th><font color="Maroon">Ritmoneury - </font></th>
-                        <th>$ 925 - Max. 3</th>
-                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                        <th><font color="Maroon">Ritmoneury</font></th>
+                        <th><span id="preco-ritmoneury">$ 925</span> - Max. 3</th>
+                        <th><input type="number" class="quantidade" data-produto="ritmoneury" min="0" value="0" oninput="atualizarValorTotal()"></th>
+                        <th><span id="total-ritmoneury">0</span></th>
                     </tr>
                     <tr>
-                        <th><font color="Maroon">Sinkalmy - </font></th>
-                        <th>$ 750 - Max. 3</th>
-                        <th><input type="number" class="quantidade" min="0" value="0"></th>
+                        <th><font color="Maroon">Sinkalmy</font></th>
+                        <th><span id="preco-sinkalmy">$ 750</span> - Max. 3</th>
+                        <th><input type="number" class="quantidade" data-produto="sinkalmy" min="0" value="0" oninput="atualizarValorTotal()"></th>
+                        <th><span id="total-sinkalmy">0</span></th>
                     </tr>
                 </tbody>
             </table>
-            <br>
-            <input type="submit" value="Calcular">
         </form>
 
         <div id="resultado">
-            
+           <b> Valor Total de Todos os Produtos:</b> <span id="total-geral"><b>0</b></span>
         </div>
 
+        <h1 style="text-align: center;">Valores do atendimento</h1>
+        <table style="margin: 0 auto;">
+            <tr>
+                <th style="font-weight: bold; text-align: center;"><font color="purple">Civis</font> - <font color="red">$500</font></th>
+            </tr>
+            <tr>
+                <th style="font-weight: bold; text-align: center;"><font color="purple">Policial fardado</font> - <font color="red">$ 250</font></th>
+            </tr>
+            <tr>
+                <th style="font-weight: bold; text-align: center;"><font color="purple">Doadores de sangue</font> - <font color="red">Grátis dentro de 3 horas após a doação</font></th>
+            </tr>
+            <tr>
+                <th style="font-weight: bold; text-align: center;"><font color="purple">Psicotecnicos caça e policia</font> - <font color="red">$ 1500</font></th>
+            </tr>
+        </table>
+
         <script>
-            document.getElementById("calculadoraForm").addEventListener("submit", function (event) {
-                event.preventDefault();
-
-               
+            function atualizarValorTotal() {
                 var quantidades = document.getElementsByClassName("quantidade");
-
-                
                 var precos = [200, 500, 250, 1350, 925, 750];
+                var valorTotalGeral = 0;
 
-                var valorTotal = 0;
-
-                
                 for (var i = 0; i < quantidades.length; i++) {
                     var quantidade = parseFloat(quantidades[i].value);
-                    valorTotal += quantidade * precos[i];
+                    var totalProduto = quantidade * precos[i];
+                    var produto = quantidades[i].getAttribute("data-produto");
+                    document.getElementById("total-" + produto).textContent = totalProduto;
+                    valorTotalGeral += totalProduto;
                 }
 
-                // Exibir o resultado
-                document.getElementById("resultado").innerHTML = "Valor Total: $" + valorTotal.toFixed(2);
-            });
+                document.getElementById("total-geral").innerHTML = "<b>" + valorTotalGeral + "</b>";
+            }
 
-            
             function toggleDarkMode() {
                 const body = document.body;
                 if (body.classList.contains("dark-mode")) {
@@ -121,34 +131,6 @@
                 }
             }
         </script>
-
-        <h1>Valores do atendimento</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th><font color="purple">Civis - </font></th>
-                    <th><font color="red">$500</font></th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th><font color="purple">Policial fardado - </font></th>
-                    <th><font color="red">$ 250</font></th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th><font color="purple">Doadores de sangue - </font></th>
-                    <th><font color="red">Grátis dentro de 3 horas após a doação</font></th>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <th><font color="purple">Psicotecnicos caça e policia - </font></th>
-                    <th><font color="red">$ 1500</font></th>
-                </tr>
-            </thead>
-        </table>
     </center>
 
     <center>
@@ -156,3 +138,4 @@
     </center>
 </body>
 </html>
+
