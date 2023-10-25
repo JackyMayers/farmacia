@@ -27,9 +27,9 @@
     <center>
         <b>
             <a href="https://tairritadotio.github.io/index.html">Inicio</a>
-        <a href="https://tairritadotio.github.io/farmacia/">Farmacia</a>
-        <a href="https://tairritadotio.github.io/ponto2/">Ponto2</a>
-        <a href="https://tairritadotio.github.io/ponto3/">Ponto3</a>
+            <a href="https://tairritadotio.github.io/farmacia/">Farmacia</a>
+            <a href="https://tairritadotio.github.io/ponto2/">Ponto2</a>
+            <a href="https://tairritadotio.github.io/ponto3/">Ponto3</a>
         </b>
     </center>
 
@@ -87,8 +87,14 @@
             </table>
         </form>
 
-        <div id="resultado">
-           <b> Valor Total de Todos os Produtos:</b> <span id="total-geral"><b>0</b></span>
+        <div id="resultado-produtos">
+            <b>Valor Total de Todos os Produtos:</b> <span id="total-geral"><b>0</b></span>
+        </div>
+
+        <div id="resultado-tempo">
+            <label for="hora-doacao">Digite a hora da doação (formato hh:mm): </label>
+            <input type="text" id="hora-doacao" placeholder="hh:mm" onblur="verificarTempoDoacao()">
+            <p id="tempo-resultado"></p>
         </div>
 
         <h1 style="text-align: center;">Valores do atendimento</h1>
@@ -132,6 +138,19 @@
                     body.classList.add("dark-mode");
                 }
             }
+
+            function verificarTempoDoacao() {
+                var horaDoacao = document.getElementById('hora-doacao').value;
+                var tempoDoacao = new Date();
+                var horaAtual = ('0' + tempoDoacao.getHours()).slice(-2) + ':' + ('0' + tempoDoacao.getMinutes()).slice(-2);
+                var tempoRestante = 3 - (tempoDoacao.getHours() - parseInt(horaDoacao.split(':')[0]));
+
+                if (tempoRestante >= 0) {
+                    document.getElementById('tempo-resultado').innerHTML = '<b>Ainda dentro do tempo para atendimento gratuito.</b>';
+                } else {
+                    document.getElementById('tempo-resultado').innerHTML = '<b>Tempo para atendimento gratuito expirado.</b>';
+                }
+            }
         </script>
     </center>
 
@@ -140,4 +159,3 @@
     </center>
 </body>
 </html>
-
